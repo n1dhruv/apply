@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Person {
+  id           String   @id @default(cuid())
+  name         String
+  linkedinUrl  String
+  instagramUrl String
+  gender       String?
+  interestedIn String?  @default("open to all")
+  status       String   @default("pending")
+  createdAt    DateTime @default(now())
+  rawSources   RawSource[]
+  profile      Profile?
+}
+
+model RawSource {
+  id       String  @id @default(cuid())
+  personId String
+  person   Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  source   String
+  rawJson  Json
+  ok       Boolean @default(true)
+  error    String?
+  fetchedAt DateTime @default(now())
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  personId  String   @unique
+  person    Person   @relation(fields: [personId], references: [id], onDelete: Cascade)
+  json      Json
+  summary   String
+  createdAt DateTime @default(now())
+}
+
+model Pair {
+  id             String @id @default(cuid())
+  aId            String
+  bId            String
+  prefilterScore Int    @default(0)
+  prefilterReason String @default("")
+  @@unique([aId, bId])
+}
+
+model Date {
+  id            String      @id @default(cuid())
+  aId           String
+  bId           String
+  transcriptJson Json
+  status        String      @default("done")
+  createdAt     DateTime    @default(now())
+  scores        DateScore[]
+}
+
+model DateScore {
+  id           String  @id @default(cuid())
+  dateId       String
+  date         Date    @relation(fields: [dateId], references: [id], onDelete: Cascade)
+  raterId      String
+  score        Int
+  chemistry    Int
+  valuesFit    Int
+  lifestyleFit Int
+  reason       String
+  wouldMeetAgain Boolean
+}
+
+model Ranking {
+  id         String @id @default(cuid())
+  personId   String
+  rank       Int
+  otherId    String
+  finalScore Int
+  why        String
+  dateId     String?
+  @@unique([personId, otherId])
+}
+
+model Job {
+  id        String   @id @default(cuid())
+  type      String
+  payload   Json
+  status    String   @default("pending")
+  error     String?
+  createdAt DateTime @default(now())
+}

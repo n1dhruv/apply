@@ -1,0 +1,30 @@
+// Seed pool: 25 real-feeling demo people. REPLACE with the consented
+// people.csv (name,linkedin_url,instagram_url) before recording.
+// Shape matches POST /api/people so import-people.ts can overwrite this.
+export const SEED_PEOPLE = [
+  { name: "Aarav Mehta", linkedin: "https://linkedin.com/in/aaravmehta", instagram: "https://instagram.com/aarav.builds", li: "SWE @ fintech, IIT Bombay, hackathons, volunteering.", ig: "Weekend treks in Sahyadris, film photography, espresso." },
+  { name: "Diya Sharma", linkedin: "https://linkedin.com/in/diyasharma", instagram: "https://instagram.com/diya.sketches", li: "Product designer, NID, design systems, mentoring.", ig: "Sketchbook diaries, pottery, indie gigs, slow travel." },
+  { name: "Kabir Rao", linkedin: "https://linkedin.com/in/kabirrao", instagram: "https://instagram.com/kabir.runs", li: "Data scientist, marathoner, chess club lead.", ig: "5am runs, chess puzzles, filter coffee, mountains." },
+  { name: "Ananya Iyer", linkedin: "https://linkedin.com/in/ananyaiyer", instagram: "https://instagram.com/ananya.reads", li: "Consultant @ Big4, economics, debate society.", ig: "Bookstores, poetry slams, baking sourdough." },
+  { name: "Vivaan Patel", linkedin: "https://linkedin.com/in/vivaanpatel", instagram: "https://instagram.com/vivaan.frames", li: "Filmmaker + editor, shorts, documentary.", ig: "Street photography, old Bollywood, bike trips." },
+  { name: "Ishita Nair", linkedin: "https://linkedin.com/in/ishitanair", instagram: "https://instagram.com/ishita.moves", li: "Physio + dance therapist, classical dance.", ig: "Bharatanatyam reels, yoga, monsoon drives." },
+  { name: "Arjun Malhotra", linkedin: "https://linkedin.com/in/arjunmalhotra", instagram: "https://instagram.com/arjun.cooks", li: "PM @ SaaS startup, IIIT, quizzes.", ig: "Home chef experiments, board games, F1." },
+  { name: "Myra Kapoor", linkedin: "https://linkedin.com/in/myrakapoor", instagram: "https://instagram.com/myra.writes", li: "Content strategist, podcast host.", ig: "Poetry, vinyl records, cafe hopping, dogs." },
+  { name: "Aditya Singh", linkedin: "https://linkedin.com/in/adityasingh", instagram: "https://instagram.com/adi.lifts", li: "Mechanical engineer, robotics club, gym.", ig: "Powerlifting, bikes, tech teardowns." },
+  { name: "Navya Reddy", linkedin: "https://linkedin.com/in/navyareddy", instagram: "https://instagram.com/navya.travels", li: "Doctor (MBBS), public health volunteer.", ig: "Solo travel, hostels, mountains, journaling." },
+  { name: "Krishna Menon", linkedin: "https://linkedin.com/in/krishnamenon", instagram: "https://instagram.com/krishna.codes", li: "Backend engineer, Go + Postgres, OSS.", ig: "Mechanical keyboards, Carnatic fusion, cycling." },
+  { name: "Sara Thomas", linkedin: "https://linkedin.com/in/sarathomas", instagram: "https://instagram.com/sara.bakes", li: "Architect, sustainable design.", ig: "Baking, heritage walks, watercolor." },
+  { name: "Rohan Gupta", linkedin: "https://linkedin.com/in/rohangupta", instagram: "https://instagram.com/rohan.scales", li: "Founder, D2C brand, climbing.", ig: "Bouldering, startups, standup comedy." },
+  { name: "Priya Desai", linkedin: "https://linkedin.com/in/priyadesai", instagram: "https://instagram.com/priya.sings", li: "Marketing @ music label, choir.", ig: "Singing covers, gigs, thrift fashion." },
+  { name: "Nikhil Bose", linkedin: "https://linkedin.com/in/nikhilbose", instagram: "https://instagram.com/nikhil.games", li: "Game dev, Unity, esports caster.", ig: "Indie games, anime, ramen hunts." },
+  { name: "Riya Jain", linkedin: "https://linkedin.com/in/riyajain", instagram: "https://instagram.com/riya.plants", li: "CA, finance blogger.", ig: "Balcony garden, cats, cozy mysteries." },
+  { name: "Farhan Khan", linkedin: "https://linkedin.com/in/farhankhan", instagram: "https://instagram.com/farhan.frames", li: "Photographer, weddings + street.", ig: "Night streets, chai stalls, Urdu poetry." },
+  { name: "Sneha Kulkarni", linkedin: "https://linkedin.com/in/snehakulkarni", instagram: "https://instagram.com/sneha.swims", li: "Researcher, marine biology.", ig: "Open-water swims, dives, beach cleanups." },
+  { name: "Varun Nair", linkedin: "https://linkedin.com/in/varunnair", instagram: "https://instagram.com/varun.strums", li: "SDE, guitar, college band.", ig: "Guitar covers, Vinyl, road trips." },
+  { name: "Pooja Agarwal", linkedin: "https://linkedin.com/in/poojaagarwal", instagram: "https://instagram.com/pooja.makes", li: "Fashion designer, upcycling label.", ig: "Thrift flips, block prints, dance." },
+  { name: "Karthik Subramanian", linkedin: "https://linkedin.com/in/karthiks", instagram: "https://instagram.com/karthik.trails", li: "Civil engineer, ultra runner.", ig: "Trail ultras, idli hunts, maps." },
+  { name: "Meera Joshi", linkedin: "https://linkedin.com/in/meerajoshi", instagram: "https://instagram.com/meera.stages", li: "Theatre actor + teacher.", ig: "Stage BTS, improv nights, chai." },
+  { name: "Dev Shah", linkedin: "https://linkedin.com/in/devshah", instagram: "https://instagram.com/dev.hoops", li: "Analyst, basketball, sneakers.", ig: "Pickup hoops, sneaker drops, hip-hop." },
+  { name: "Anika Verma", linkedin: "https://linkedin.com/in/anikaverma", instagram: "https://instagram.com/anika.stars", li: "Astrophysics grad, science writer.", ig: "Telescope nights, sci-fi, terrace garden." },
+  { name: "Yash Thakur", linkedin: "https://linkedin.com/in/yashthakur", instagram: "https://instagram.com/yash.rides", li: "Auto journalist, EVs.", ig: "Moto rides, Ladakh diaries, dhabas." },
+];
