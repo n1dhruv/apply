@@ -11,7 +11,6 @@
     "run-batch": "tsx scripts/run-batch.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1",
     "next": "14.2.5",
     "p-limit": "^6.1.0",
     "react": "^18.3.1",

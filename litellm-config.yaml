@@ -1,0 +1,23 @@
+# LiteLLM proxy config — one gateway for any free-tier model.
+# Start it with:  litellm --config litellm-config.yaml --port 4000
+# The app talks to http://localhost:4000 via LLM_BASE_URL (see lib/llm.ts).
+# Get a free key: https://aistudio.google.com/apikey (Gemini free tier).
+
+model_list:
+  - model_name: gemini-flash
+    litellm_params:
+      model: gemini/gemini-2.0-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # Free alternatives (uncomment + set key to use):
+  # - model_name: llama-free
+  #   litellm_params:
+  #     model: openrouter/meta-llama/llama-3.1-8b-instruct:free
+  #     api_key: os.environ/OPENROUTER_API_KEY
+  # - model_name: groq-fast
+  #   litellm_params:
+  #     model: groq/llama-3.1-8b-instant
+  #     api_key: os.environ/GROQ_API_KEY
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

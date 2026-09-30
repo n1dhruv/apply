@@ -1,26 +1,25 @@
 import type { ProfileJSON } from "./types";
+import { chatComplete, extractJSON, llmConfigured } from "./llm";
 
 // Profiler: LinkedIn + Instagram text → structured ProfileJSON.
-// Uses Claude when ANTHROPIC_API_KEY is set; otherwise deterministic mock
-// so the site + video flow works offline. Every claim carries evidence.
+// Uses LiteLLM proxy (Gemini free tier by default) when configured;
+// otherwise deterministic mock so the site + video flow works offline.
+// Every claim carries evidence.
+const SYSTEM = `You analyze one person from two sources only: their public LinkedIn and public Instagram. Output JSON matching the ProfileJSON schema with keys: name, headline, one_line_summary, needs[{need,evidence,confidence}], hobbies[{hobby,evidence,source}], interests[], values[], personality_traits[{trait,evidence}], communication_style, lifestyle{pace,social_energy,travel,fitness}, career_ambition, dealbreakers_guess[], conversation_hooks[], data_gaps[]. Rules: every need/hobby/trait/value must include short evidence from the sources. Separate stated vs inferred (lower confidence for inferred). Never infer sexual orientation, religion, health, caste, ethnicity. Do not invent facts. List thin areas under data_gaps. Plain language. Return the JSON object only.`;
 
 export async function profiler(name: string, linkedinText: string, instagramText: string): Promise<{ profile: ProfileJSON; summary: string }> {
-  if (process.env.ANTHROPIC_API_KEY) {
-    const { default: Anthropic } = await import("@anthropic-ai/sdk");
-    const client = new Anthropic();
-    const sys = `You analyze one person from two sources only: their public LinkedIn and public Instagram. Output JSON matching the schema. Rules: every need/hobby/trait/value must include short evidence from the sources. Separate stated vs inferred (lower confidence for inferred). Never infer sexual orientation, religion, health, caste, ethnicity. Do not invent facts. List thin areas under data_gaps. Plain language.`;
-    const res = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 2000,
-      system: sys,
-      messages: [{ role: "user", content: `Name: ${name}\n\nLINKEDIN:\n${linkedinText.slice(0, 6000)}\n\nINSTAGRAM:\n${instagramText.slice(0, 6000)}\n\nReturn the ProfileJSON object only.` }],
-    });
-    const text = res.content.filter((b) => b.type === "text").map((b) => (b as { text: string }).text).join("");
+  if (llmConfigured()) {
     try {
-      const profile = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0] ?? text) as ProfileJSON;
+      const text = await chatComplete({
+        system: SYSTEM,
+        user: `Name: ${name}\n\nLINKEDIN:\n${linkedinText.slice(0, 6000)}\n\nINSTAGRAM:\n${instagramText.slice(0, 6000)}`,
+        maxTokens: 2000,
+        temperature: 0.5,
+      });
+      const profile = extractJSON<ProfileJSON>(text);
       return { profile, summary: profile.one_line_summary };
     } catch {
-      return { profile: mockProfile(name, linkedinText, instagramText), summary: `${name}: analysis (fallback parse).` };
+      /* fall through to mock */
     }
   }
   return { profile: mockProfile(name, linkedinText, instagramText), summary: `${name}: ${linkedinText.slice(0, 80)}…` };

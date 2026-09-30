@@ -21,7 +21,7 @@ If the site only looks good but one of these is fake, it fails. Build the thin r
 |---|---|---|
 | Framework | Next.js (App Router) + TypeScript | One repo, API routes + UI, deploys to Vercel in minutes |
 | DB | Postgres on Neon or Supabase (SQLite only if you run it on a single VM) | Serverless-friendly, persistent demo data |
-| LLM | Claude API (Sonnet for dates, a cheaper/faster model for prefilter and scoring if needed) | Strong at structured JSON and role-play |
+| LLM | LiteLLM proxy → Gemini free tier (`gemini/gemini-2.0-flash`); swap `LLM_MODEL` for any OpenRouter/Groq free model | Free keys, one OpenAI-compatible interface for profiler, dates, and judge |
 | Scraping | Hosted scraping API (Apify actors or similar) for both LinkedIn and Instagram | Direct scraping of LinkedIn from a server gets blocked; do not build your own login-based scraper |
 | Jobs | DB-backed job table + polling from the UI (no Redis) | Fewest moving parts in 3 hours |
 | Hosting | Vercel (frontend + API) | Fast. Long jobs: break into small per-pair calls so nothing exceeds function time limits |
